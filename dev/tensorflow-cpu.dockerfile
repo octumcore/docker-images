@@ -1,4 +1,4 @@
-FROM  tensorflow/tensorflow:2.3.0-cpu
+FROM  tensorflow/tensorflow:2.3.0
 
 ARG USERNAME=dev
 ARG USER_UID=1000
