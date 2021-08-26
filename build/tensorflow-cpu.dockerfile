@@ -10,9 +10,7 @@ RUN rm -f packages-microsoft-prod.deb
 
 RUN apt-get update
 
-# Fix vulnerable packages and install aspnetcore
-RUN apt-get install -y apparmor openssl systemd nettle-bin libglib2.0-0 nghttp2 libldap-common p11-kit curl \
-    && apt-get install -y aspnetcore-runtime-3.1
+RUN apt-get install -y aspnetcore-runtime-3.1 libgdiplus apparmor openssl systemd nettle-bin libglib2.0-0 nghttp2 libldap-common p11-kit curl
 
 # SDK only needed for SSL certificate and should be removed after we or the customer provide a certificate.
 RUN apt-get install -y dotnet-sdk-3.1=3.1.410-1 \
