@@ -15,7 +15,7 @@ RUN groupadd --gid $USER_GID $USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME
 
 RUN  apt-get update \
-    && apt-get install -y wget git curl gnupg \
+    && apt-get install -y wget git curl gnupg\
     && rm -rf /var/lib/apt/lists/*
 
 # install nodejs
@@ -28,7 +28,7 @@ RUN wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-p
 RUN dpkg -i packages-microsoft-prod.deb
 
 RUN apt-get update \
-    && apt-get install -y apt-transport-https aspnetcore-runtime-3.1 ffmpeg libsm6 libxext6
+    && apt-get install -y apt-transport-https aspnetcore-runtime-3.1 ffmpeg libsm6 libxext6 libgdiplus
 
 RUN python3.6 -m pip install pip
 RUN pip3 install matplotlib Pillow sklearn scikit-image pandas psutil neural-structured-learning==1.1.0 opencv_python
