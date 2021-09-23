@@ -1,4 +1,4 @@
-FROM  mcr.microsoft.com/dotnet/core/sdk:3.1.410-focal
+FROM  mcr.microsoft.com/dotnet/sdk:5.0.401-focal
 
 # install the report generator tool
 RUN dotnet tool install dotnet-reportgenerator-globaltool --version 4.6.5 --tool-path /tools
