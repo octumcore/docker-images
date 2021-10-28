@@ -1,4 +1,4 @@
-FROM  tensorflow/tensorflow:2.3.0
+FROM  tensorflow/tensorflow:2.6.0
 
 RUN  apt-get update \
     && apt-get install -y wget \
