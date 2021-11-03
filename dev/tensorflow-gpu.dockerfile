@@ -1,4 +1,4 @@
-FROM  tensorflow/tensorflow:2.6.0-gpu
+FROM  tensorflow/tensorflow:2.6.1-gpu
 
 ARG USERNAME=dev
 ARG USER_UID=1000
