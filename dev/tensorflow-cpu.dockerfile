@@ -1,4 +1,4 @@
-FROM  tensorflow/tensorflow:2.7.0rc1
+FROM  tensorflow/tensorflow:2.5.1
 
 ARG USERNAME=dev
 ARG USER_UID=1000
