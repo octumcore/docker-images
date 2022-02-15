@@ -17,4 +17,5 @@ RUN apt-get install -y dotnet-sdk-5.0=5.0.401-1 \
     && dotnet dev-certs https
 
 # dependencies for python train script execution
-RUN pip install pandas sklearn psutil
+RUN python3 -m pip install pip
+RUN pip3 install sklearn scikit-image pandas psutil
