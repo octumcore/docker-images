@@ -4,6 +4,13 @@ ARG USERNAME=dev
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
+# resolve Nvida cuda key error https://github.com/NVIDIA/nvidia-docker/issues/1631
+RUN rm /etc/apt/sources.list.d/cuda.list
+RUN rm /etc/apt/sources.list.d/nvidia-ml.list
+RUN apt-key del 7fa2af80
+RUN apt-key del 3bf863cc
+RUN apt-key adv --fetch-keys https://developer.download.nvidia.cn/compute/cuda/repos/ubuntu2004/x86_64/3bf863cc.pub
+
 # Create the user
 RUN groupadd --gid $USER_GID $USERNAME \
     && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
@@ -38,12 +45,40 @@ RUN apt-get install -y dotnet-sdk-5.0=5.0.401-1 \
     && dotnet dev-certs https
 
 # Install chrome (needed for unit tests)
-RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
-    && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list
-RUN apt-get update && apt-get -y install google-chrome-stable
+RUN wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+RUN dpkg -i google-chrome-stable_current_amd64.deb; apt-get -fy install
+RUN rm -f google-chrome-stable_current_amd64.deb
 
 # Create Octum shared folder with user permissions
 RUN mkdir -p /usr/share/Octum \
     && chown ${USERNAME} /usr/share/Octum
+
+
+######## START - mvIMPACT Acquire
+# Set environment variables
+ENV MVIMPACT_ACQUIRE_DIR /opt/mvIMPACT_Acquire
+ENV MVIMPACT_ACQUIRE_DATA_DIR /opt/mvIMPACT_Acquire/data
+ENV GENICAM_GENTL64_PATH /opt/mvIMPACT_Acquire/lib/x86_64
+ENV GENICAM_ROOT /opt/mvIMPACT_Acquire/runtime
+
+# update packets and install minimal requirements
+# after installation it will clean apt packet cache
+
+RUN apt-get update
+RUN apt-get install -y build-essential
+RUN apt-get install -y iproute2
+RUN apt-get clean 
+RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# move the directory mvIMPACT_Acquire with *.tgz and *.sh files to the container
+COPY ./misc/mvIMPACT_Acquire /var/lib/mvIMPACT_Acquire
+
+# execute the setup script in an unattended mode
+RUN cd /var/lib/mvIMPACT_Acquire && \
+  sudo ./install_mvGenTL_Acquire.sh -u --minimal -gev && \
+  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+RUN rm -rf /var/lib/mvIMPACT_Acquire
+######## END - mvIMPACT Acquire
 
 USER $USERNAME
