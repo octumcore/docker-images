@@ -67,7 +67,7 @@ COPY ./misc/mvIMPACT_Acquire /var/lib/mvIMPACT_Acquire
 
 # execute the setup script in an unattended mode
 RUN cd /var/lib/mvIMPACT_Acquire && \
-  sudo ./install_mvGenTL_Acquire.sh -u --minimal -gev && \
+  ./install_mvGenTL_Acquire.sh -u --minimal -gev && \
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN rm -rf /var/lib/mvIMPACT_Acquire
