@@ -26,7 +26,7 @@ RUN  apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 # install nodejs
-RUN curl -sL https://deb.nodesource.com/setup_12.x  | bash -
+RUN curl -sL https://deb.nodesource.com/setup_18.x  | bash -
 RUN apt-get -y install nodejs
 
 RUN npm install -g @angular/cli@8.3.26

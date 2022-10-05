@@ -6,7 +6,7 @@ RUN dotnet tool install dotnet-reportgenerator-globaltool --version 4.6.5 --tool
 # install nodejs
 RUN apt-get update
 RUN apt-get -y install curl gnupg
-RUN curl -sL https://deb.nodesource.com/setup_12.x  | bash -
+RUN curl -sL https://deb.nodesource.com/setup_18.x  | bash -
 RUN apt-get -y install nodejs
 
 # install chrome (needed for unit tests)
