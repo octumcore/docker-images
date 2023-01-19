@@ -34,7 +34,7 @@ RUN python3 -m pip install pip
 RUN pip3 install matplotlib Pillow sklearn scikit-image pandas psutil neural-structured-learning==1.1.0 opencv_python
 
 # Install dotnet sdk
-RUN apt-get install -y dotnet-sdk-7.0=7.0.102 \
+RUN apt-get install -y dotnet-sdk-7.0=7.0.102-1 \
     && dotnet dev-certs https
 
 # Install chrome (needed for unit tests)
