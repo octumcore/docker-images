@@ -1,7 +1,7 @@
-FROM  mcr.microsoft.com/dotnet/sdk:6.0.401-focal
+FROM  mcr.microsoft.com/dotnet/sdk:7.0.102-jammy
 
 # install the report generator tool
-RUN dotnet tool install dotnet-reportgenerator-globaltool --version 4.6.5 --tool-path /tools
+RUN dotnet tool install dotnet-reportgenerator-globaltool --version 5.1.14 --tool-path /tools
 
 # install nodejs
 RUN apt-get update

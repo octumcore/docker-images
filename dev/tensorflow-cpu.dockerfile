@@ -28,13 +28,13 @@ RUN wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-p
 RUN dpkg -i packages-microsoft-prod.deb
 
 RUN apt-get update \
-    && apt-get install -y apt-transport-https aspnetcore-runtime-5.0 ffmpeg libsm6 libxext6 libgdiplus
+    && apt-get install -y apt-transport-https aspnetcore-runtime-7.0 ffmpeg libsm6 libxext6 libgdiplus
 
 RUN python3 -m pip install pip
 RUN pip3 install matplotlib Pillow sklearn scikit-image pandas psutil neural-structured-learning==1.1.0 opencv_python
 
 # Install dotnet sdk
-RUN apt-get install -y dotnet-sdk-6.0=6.0.401-1 \
+RUN apt-get install -y dotnet-sdk-7.0=7.0.102 \
     && dotnet dev-certs https
 
 # Install chrome (needed for unit tests)
