@@ -3,11 +3,11 @@ FROM  mcr.microsoft.com/dotnet/sdk:7.0.102-jammy
 # install the report generator tool
 RUN dotnet tool install dotnet-reportgenerator-globaltool --version 5.1.14 --tool-path /tools
 
-# install asp net core runtime 3.1, needed for babel
+# install old runtime for babel
 RUN wget https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
 RUN dpkg -i packages-microsoft-prod.deb
 RUN apt-get update \
-    && apt-get install -y aspnetcore-runtime-3.1 
+    && apt-get install -y aspnetcore-runtime-5.0 
 
 # install nodejs
 RUN apt-get update
