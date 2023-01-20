@@ -27,8 +27,9 @@ RUN npm install -g @angular/cli@8.3.26
 RUN wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
 RUN dpkg -i packages-microsoft-prod.deb
 
+# aspnetcore-runtime-3.1 is needed for babel
 RUN apt-get update \
-    && apt-get install -y apt-transport-https aspnetcore-runtime-7.0 ffmpeg libsm6 libxext6 libgdiplus
+    && apt-get install -y apt-transport-https aspnetcore-runtime-3.1 aspnetcore-runtime-7.0 ffmpeg libsm6 libxext6 libgdiplus
 
 RUN python3 -m pip install pip
 RUN pip3 install matplotlib Pillow sklearn scikit-image pandas psutil neural-structured-learning==1.1.0 opencv_python
