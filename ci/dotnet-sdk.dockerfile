@@ -1,4 +1,6 @@
 FROM  mcr.microsoft.com/dotnet/sdk:6.0.401-focal
+# do not use 7.0.102-jammy image from microsoft, because ubuntu 22.04 does only support .NET 6+ runtime/sdks
+# for babel obfuscation we need dotnet runtime 3.1
 
 # install the report generator tool
 RUN dotnet tool install dotnet-reportgenerator-globaltool --version 5.1.14 --tool-path /tools
